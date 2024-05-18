@@ -142,6 +142,7 @@ class Video extends Bitmap
 	public var onBackward(default, null):Event<Void->Void>;
 	public var onMediaChanged(default, null):Event<Void->Void>;
 	public var onTextureSetup(default, null):Event<Void->Void>;
+	public var onUpdate:Void->Void = null;
 
 	// Declarations
 	private var oldTime:Float = 0;
@@ -482,6 +483,8 @@ class Video extends Bitmap
 
 		if (__renderable && isPlaying)
 		{
+			if(onUpdate != null) onUpdate();
+
 			deltaTime += elapsed;
 
 			if (Math.abs(deltaTime - oldTime) > 8.3) // 8.(3) means 120 fps in milliseconds...
